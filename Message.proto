@@ -1,0 +1,17 @@
+syntax="proto3";
+
+package main;
+
+
+message Client{
+    string client=1;
+}
+
+message DockerVersion {
+    string version = 1;
+}
+
+
+service DockerService {
+    rpc GetDockerVersion(Client) returns (DockerVersion) {}
+}
