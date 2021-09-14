@@ -22,6 +22,24 @@ func dockerVersion() (string, error) {
 	return command_output.String(), nil
 }
 
+//Function for Deploy and Image
+func deployImage(image string) (string, error) {
+
+	//Requires sudo
+	cmd := exec.Command("sudo", "docker", "run", "-d", image)
+	var command_output bytes.Buffer
+	cmd.Stdout = &command_output
+
+	err := cmd.Run()
+	log.Println(command_output.String())
+	if err != nil {
+		return "", errors.New("unable to Deploy the Image")
+	}
+
+	return command_output.String(), nil
+
+}
+
 type Server struct {
 	UnimplementedDockerServiceServer //Denote the type corresponds to grpc DockerService service
 }
@@ -40,6 +58,23 @@ func (s *Server) GetDockerVersion(ctx context.Context, client *Client) (*DockerV
 
 	result := DockerVersion{
 		Version: docker_version,
+	}
+
+	return &result, nil
+
+}
+
+//Method Denotes DeployImage method of docker service
+func (s *Server) DeployImage(ctx context.Context, deploymentParams *DeploymentParams) (*Conatiner, error) {
+
+	log.Print("Request from:", deploymentParams.Client)
+	ContainerId, err := deployImage(deploymentParams.Image)
+	if err != nil {
+		log.Println("Unable to deploy container!")
+		return nil, errors.New("deploy image failed")
+	}
+	result := Conatiner{
+		ContainerID: ContainerId,
 	}
 
 	return &result, nil

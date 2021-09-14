@@ -20,6 +20,53 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type Conatiner struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ContainerID string `protobuf:"bytes,1,opt,name=containerID,proto3" json:"containerID,omitempty"`
+}
+
+func (x *Conatiner) Reset() {
+	*x = Conatiner{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_Message_proto_msgTypes[0]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Conatiner) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Conatiner) ProtoMessage() {}
+
+func (x *Conatiner) ProtoReflect() protoreflect.Message {
+	mi := &file_Message_proto_msgTypes[0]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Conatiner.ProtoReflect.Descriptor instead.
+func (*Conatiner) Descriptor() ([]byte, []int) {
+	return file_Message_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *Conatiner) GetContainerID() string {
+	if x != nil {
+		return x.ContainerID
+	}
+	return ""
+}
+
 type Client struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -31,7 +78,7 @@ type Client struct {
 func (x *Client) Reset() {
 	*x = Client{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_Message_proto_msgTypes[0]
+		mi := &file_Message_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -44,7 +91,7 @@ func (x *Client) String() string {
 func (*Client) ProtoMessage() {}
 
 func (x *Client) ProtoReflect() protoreflect.Message {
-	mi := &file_Message_proto_msgTypes[0]
+	mi := &file_Message_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -57,7 +104,7 @@ func (x *Client) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Client.ProtoReflect.Descriptor instead.
 func (*Client) Descriptor() ([]byte, []int) {
-	return file_Message_proto_rawDescGZIP(), []int{0}
+	return file_Message_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Client) GetClient() string {
@@ -78,7 +125,7 @@ type DockerVersion struct {
 func (x *DockerVersion) Reset() {
 	*x = DockerVersion{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_Message_proto_msgTypes[1]
+		mi := &file_Message_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -91,7 +138,7 @@ func (x *DockerVersion) String() string {
 func (*DockerVersion) ProtoMessage() {}
 
 func (x *DockerVersion) ProtoReflect() protoreflect.Message {
-	mi := &file_Message_proto_msgTypes[1]
+	mi := &file_Message_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,7 +151,7 @@ func (x *DockerVersion) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DockerVersion.ProtoReflect.Descriptor instead.
 func (*DockerVersion) Descriptor() ([]byte, []int) {
-	return file_Message_proto_rawDescGZIP(), []int{1}
+	return file_Message_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *DockerVersion) GetVersion() string {
@@ -114,21 +161,86 @@ func (x *DockerVersion) GetVersion() string {
 	return ""
 }
 
+type DeploymentParams struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Image  string `protobuf:"bytes,1,opt,name=image,proto3" json:"image,omitempty"`
+	Client string `protobuf:"bytes,2,opt,name=client,proto3" json:"client,omitempty"`
+}
+
+func (x *DeploymentParams) Reset() {
+	*x = DeploymentParams{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_Message_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeploymentParams) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeploymentParams) ProtoMessage() {}
+
+func (x *DeploymentParams) ProtoReflect() protoreflect.Message {
+	mi := &file_Message_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeploymentParams.ProtoReflect.Descriptor instead.
+func (*DeploymentParams) Descriptor() ([]byte, []int) {
+	return file_Message_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DeploymentParams) GetImage() string {
+	if x != nil {
+		return x.Image
+	}
+	return ""
+}
+
+func (x *DeploymentParams) GetClient() string {
+	if x != nil {
+		return x.Client
+	}
+	return ""
+}
+
 var File_Message_proto protoreflect.FileDescriptor
 
 var file_Message_proto_rawDesc = []byte{
 	0x0a, 0x0d, 0x4d, 0x65, 0x73, 0x73, 0x61, 0x67, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
-	0x04, 0x6d, 0x61, 0x69, 0x6e, 0x22, 0x20, 0x0a, 0x06, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x12,
-	0x16, 0x0a, 0x06, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x06, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x22, 0x29, 0x0a, 0x0d, 0x44, 0x6f, 0x63, 0x6b, 0x65,
-	0x72, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73,
-	0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69,
-	0x6f, 0x6e, 0x32, 0x48, 0x0a, 0x0d, 0x44, 0x6f, 0x63, 0x6b, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x12, 0x37, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x44, 0x6f, 0x63, 0x6b, 0x65, 0x72,
-	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x0c, 0x2e, 0x6d, 0x61, 0x69, 0x6e, 0x2e, 0x43,
-	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x1a, 0x13, 0x2e, 0x6d, 0x61, 0x69, 0x6e, 0x2e, 0x44, 0x6f, 0x63,
-	0x6b, 0x65, 0x72, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x04, 0x6d, 0x61, 0x69, 0x6e, 0x22, 0x2d, 0x0a, 0x09, 0x43, 0x6f, 0x6e, 0x61, 0x74, 0x69, 0x6e,
+	0x65, 0x72, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x49,
+	0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6f, 0x6e, 0x74, 0x61, 0x69, 0x6e,
+	0x65, 0x72, 0x49, 0x44, 0x22, 0x20, 0x0a, 0x06, 0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x12, 0x16,
+	0x0a, 0x06, 0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
+	0x63, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x22, 0x29, 0x0a, 0x0d, 0x44, 0x6f, 0x63, 0x6b, 0x65, 0x72,
+	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x18, 0x0a, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69,
+	0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x76, 0x65, 0x72, 0x73, 0x69, 0x6f,
+	0x6e, 0x22, 0x40, 0x0a, 0x10, 0x44, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x69, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x63,
+	0x6c, 0x69, 0x65, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x63, 0x6c, 0x69,
+	0x65, 0x6e, 0x74, 0x32, 0x7e, 0x0a, 0x0d, 0x44, 0x6f, 0x63, 0x6b, 0x65, 0x72, 0x53, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x12, 0x35, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x44, 0x6f, 0x63, 0x6b, 0x65,
+	0x72, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x0c, 0x2e, 0x6d, 0x61, 0x69, 0x6e, 0x2e,
+	0x43, 0x6c, 0x69, 0x65, 0x6e, 0x74, 0x1a, 0x13, 0x2e, 0x6d, 0x61, 0x69, 0x6e, 0x2e, 0x44, 0x6f,
+	0x63, 0x6b, 0x65, 0x72, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x12, 0x36, 0x0a, 0x0b, 0x44,
+	0x65, 0x70, 0x6c, 0x6f, 0x79, 0x49, 0x6d, 0x61, 0x67, 0x65, 0x12, 0x16, 0x2e, 0x6d, 0x61, 0x69,
+	0x6e, 0x2e, 0x44, 0x65, 0x70, 0x6c, 0x6f, 0x79, 0x6d, 0x65, 0x6e, 0x74, 0x50, 0x61, 0x72, 0x61,
+	0x6d, 0x73, 0x1a, 0x0f, 0x2e, 0x6d, 0x61, 0x69, 0x6e, 0x2e, 0x43, 0x6f, 0x6e, 0x61, 0x74, 0x69,
+	0x6e, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -143,16 +255,20 @@ func file_Message_proto_rawDescGZIP() []byte {
 	return file_Message_proto_rawDescData
 }
 
-var file_Message_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_Message_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_Message_proto_goTypes = []interface{}{
-	(*Client)(nil),        // 0: main.Client
-	(*DockerVersion)(nil), // 1: main.DockerVersion
+	(*Conatiner)(nil),        // 0: main.Conatiner
+	(*Client)(nil),           // 1: main.Client
+	(*DockerVersion)(nil),    // 2: main.DockerVersion
+	(*DeploymentParams)(nil), // 3: main.DeploymentParams
 }
 var file_Message_proto_depIdxs = []int32{
-	0, // 0: main.DockerService.GetDockerVersion:input_type -> main.Client
-	1, // 1: main.DockerService.GetDockerVersion:output_type -> main.DockerVersion
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	1, // 0: main.DockerService.GetDockerVersion:input_type -> main.Client
+	3, // 1: main.DockerService.DeployImage:input_type -> main.DeploymentParams
+	2, // 2: main.DockerService.GetDockerVersion:output_type -> main.DockerVersion
+	0, // 3: main.DockerService.DeployImage:output_type -> main.Conatiner
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -165,7 +281,7 @@ func file_Message_proto_init() {
 	}
 	if !protoimpl.UnsafeEnabled {
 		file_Message_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*Client); i {
+			switch v := v.(*Conatiner); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -177,7 +293,31 @@ func file_Message_proto_init() {
 			}
 		}
 		file_Message_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Client); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_Message_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DockerVersion); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_Message_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeploymentParams); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -195,7 +335,7 @@ func file_Message_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_Message_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -19,6 +19,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DockerServiceClient interface {
 	GetDockerVersion(ctx context.Context, in *Client, opts ...grpc.CallOption) (*DockerVersion, error)
+	DeployImage(ctx context.Context, in *DeploymentParams, opts ...grpc.CallOption) (*Conatiner, error)
 }
 
 type dockerServiceClient struct {
@@ -38,11 +39,21 @@ func (c *dockerServiceClient) GetDockerVersion(ctx context.Context, in *Client, 
 	return out, nil
 }
 
+func (c *dockerServiceClient) DeployImage(ctx context.Context, in *DeploymentParams, opts ...grpc.CallOption) (*Conatiner, error) {
+	out := new(Conatiner)
+	err := c.cc.Invoke(ctx, "/main.DockerService/DeployImage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DockerServiceServer is the server API for DockerService service.
 // All implementations must embed UnimplementedDockerServiceServer
 // for forward compatibility
 type DockerServiceServer interface {
 	GetDockerVersion(context.Context, *Client) (*DockerVersion, error)
+	DeployImage(context.Context, *DeploymentParams) (*Conatiner, error)
 	mustEmbedUnimplementedDockerServiceServer()
 }
 
@@ -52,6 +63,9 @@ type UnimplementedDockerServiceServer struct {
 
 func (UnimplementedDockerServiceServer) GetDockerVersion(context.Context, *Client) (*DockerVersion, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDockerVersion not implemented")
+}
+func (UnimplementedDockerServiceServer) DeployImage(context.Context, *DeploymentParams) (*Conatiner, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeployImage not implemented")
 }
 func (UnimplementedDockerServiceServer) mustEmbedUnimplementedDockerServiceServer() {}
 
@@ -84,6 +98,24 @@ func _DockerService_GetDockerVersion_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DockerService_DeployImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeploymentParams)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DockerServiceServer).DeployImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/main.DockerService/DeployImage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DockerServiceServer).DeployImage(ctx, req.(*DeploymentParams))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DockerService_ServiceDesc is the grpc.ServiceDesc for DockerService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -94,6 +126,10 @@ var DockerService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDockerVersion",
 			Handler:    _DockerService_GetDockerVersion_Handler,
+		},
+		{
+			MethodName: "DeployImage",
+			Handler:    _DockerService_DeployImage_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

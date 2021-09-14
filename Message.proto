@@ -3,6 +3,11 @@ syntax="proto3";
 package main;
 
 
+message Conatiner{
+    string containerID=1;
+}
+
+
 message Client{
     string client=1;
 }
@@ -12,6 +17,12 @@ message DockerVersion {
 }
 
 
+message DeploymentParams{
+    string image=1;
+    string client=2;
+}
+
 service DockerService {
-    rpc GetDockerVersion(Client) returns (DockerVersion) {}
+    rpc GetDockerVersion(Client) returns (DockerVersion);
+    rpc DeployImage (DeploymentParams) returns (Conatiner);
 }
